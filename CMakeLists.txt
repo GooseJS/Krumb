@@ -17,5 +17,7 @@ option(GLM_TEST_ENABLE OFF)
 add_subdirectory(lib/glm)
 add_subdirectory(lib/spdlog)
 
+add_definitions(-DKMB_PLATFORM_WINDOWS)
+
 add_subdirectory(Engine)
 add_subdirectory(Krumb)

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine/EntryPoint.h"
-#include "Engine/Application.h"
+#include "KrumbEngine/EntryPoint.h"
+#include "KrumbEngine/Application.h"
 
-#include "Engine/Logger.h"
+#include "KrumbEngine/Logger.h"
