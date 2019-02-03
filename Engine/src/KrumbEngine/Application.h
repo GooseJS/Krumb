@@ -1,6 +1,8 @@
 #pragma once
 
 #include "KrumbEngine/Core.h"
+#include "KrumbEngine/KrumbTime.h"
+#include "KrumbEngine/GameSettings.h"
 #include "KrumbEngine/window/Window.h"
 
 namespace KrumbEngine

@@ -14,6 +14,11 @@ set(KRUMB_ENGINE_SRC	"src/KrumbEngine/Application.cpp"
 						"src/KrumbEngine/event/IEvent.h"
 						"src/KrumbEngine/input/InputEvents.h"
 						"src/KrumbEngine/window/WindowEvents.h"
+						"src/KrumbEngine/GameSettings.h"
+						"src/KrumbEngine/KrumbTime.h"
+						"src/KrumbEngine/render/Shader.h"
+						"src/KrumbEngine/render/Texture.h"
+						"src/KrumbEngine/render/Texture.cpp"
 
 						"src/KrumbEngine.h")
 
@@ -22,8 +27,10 @@ add_library(KrumbEngine SHARED "${KRUMB_ENGINE_SRC}")
 
 target_include_directories(KrumbEngine PUBLIC	"src"
 												"../lib/spdlog/include"
-												glfw)
-target_link_libraries(KrumbEngine PUBLIC glfw)
+												"../lib/stb"
+												glfw
+												libglew_static)
+target_link_libraries(KrumbEngine PUBLIC glfw libglew_static)
 
 add_custom_command(TARGET KrumbEngine POST_BUILD        # Adds a post-build event to MyTest
     COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
