@@ -42,7 +42,84 @@ namespace KrumbEngine
 		//glewExperimental = true;
 		// TODO: Glew stuff goes here
 
-		// TODO: Event system callback stuff goes here
+		glfwSetWindowSizeCallback(_window, [](GLFWwindow* window, int width, int height)
+		{
+			WindowData& data = KRUMB_GET_WINDOW_DATA(window);
+			data.width = static_cast<unsigned int>(width);
+			data.height = static_cast<unsigned int>(height);
+
+			EventWindowResize event(data);
+			EventSystem::getInstance()->dispatchEvent<EventWindowResize>(event);
+		});
+
+		glfwSetWindowCloseCallback(_window, [](GLFWwindow* window)
+		{
+			WindowData& data = KRUMB_GET_WINDOW_DATA(window);
+			EventWindowClose event(data);
+			EventSystem::getInstance()->dispatchEvent<EventWindowClose>(event);
+		});
+
+		glfwSetKeyCallback(_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		{
+			switch (action)
+			{
+				case GLFW_PRESS:
+				{
+					EventKeyPressed event(key, scancode, mods);
+					EventSystem::getInstance()->dispatchEvent(event);
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					EventKeyReleased event(key, scancode, mods);
+					EventSystem::getInstance()->dispatchEvent(event);
+					break;
+				}
+				case GLFW_REPEAT:
+				{
+					EventKeyRepeat event(key, scancode, mods);
+					EventSystem::getInstance()->dispatchEvent(event);
+					break;
+				}
+			}
+		});
+
+		glfwSetMouseButtonCallback(_window, [](GLFWwindow* window, int button, int action, int mods)
+		{
+			switch (action)
+			{
+				case GLFW_PRESS:
+				{
+					double xpos, ypos;
+					glfwGetCursorPos(window, &xpos, &ypos);
+					EventMouseButtonPressed event(button, xpos, ypos);
+					EventSystem::getInstance()->dispatchEvent(event);
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					double xpos, ypos;
+					glfwGetCursorPos(window, &xpos, &ypos);
+					EventMouseButtonPressed event(button, xpos, ypos);
+					EventSystem::getInstance()->dispatchEvent(event);
+					break;
+				}
+			}
+		});
+
+		glfwSetCursorPosCallback(_window, [](GLFWwindow* window, double xPos, double yPos)
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+			EventMouseMove event((float)xPos, (float)-yPos, (float)xPos - data.oldMouseX, data.oldMouseY - (float)yPos);
+			EventSystem::getInstance()->dispatchEvent(event);
+
+			data.oldMouseX = (float)xPos;
+			data.oldMouseY = (float)yPos;
+		});
+
+		EventWindowOpen event(_data);
+		EventSystem::getInstance()->dispatchEvent<EventWindowOpen>(event);
 	}
 
 	void Window::update()

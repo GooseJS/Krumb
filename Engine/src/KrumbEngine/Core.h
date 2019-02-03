@@ -24,7 +24,7 @@
 #endif
 
 #define KRUMB_STATIC_INSTANCE(x) static KRUMB_API x *getInstance() { static x instance; return &instance; }
-#define KRUMB_GET_WINDOW_DATA(x) *(WindowData*)glfwGetWindowUserPointer(x),
+#define KRUMB_GET_WINDOW_DATA(x) *(WindowData*)glfwGetWindowUserPointer(x)
 
 namespace KrumbEngine
 {

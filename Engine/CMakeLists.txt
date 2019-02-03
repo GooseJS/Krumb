@@ -9,6 +9,11 @@ set(KRUMB_ENGINE_SRC	"src/KrumbEngine/Application.cpp"
 						"src/KrumbEngine/window/Window.h"
 						"src/KrumbEngine/GL.h"
 						"src/KrumbEngine/Core.h"
+						"src/KrumbEngine/event/EventSystem.h"
+						"src/KrumbEngine/event/EventSystem.cpp"
+						"src/KrumbEngine/event/IEvent.h"
+						"src/KrumbEngine/input/InputEvents.h"
+						"src/KrumbEngine/window/WindowEvents.h"
 
 						"src/KrumbEngine.h")
 

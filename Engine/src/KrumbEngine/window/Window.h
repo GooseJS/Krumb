@@ -4,6 +4,10 @@
 
 #include "KrumbEngine/Core.h"
 
+#include "KrumbEngine/event/EventSystem.h"
+#include "KrumbEngine/input/InputEvents.h"
+#include "KrumbEngine/window/WindowEvents.h"
+
 namespace KrumbEngine
 {
 	struct WindowCfg
