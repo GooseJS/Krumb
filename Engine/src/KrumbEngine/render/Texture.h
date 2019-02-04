@@ -39,7 +39,7 @@ namespace KrumbEngine
 			GLuint textureID;
 			std::unordered_map<std::string, uint8_t> textureEntries;
 
-			int getEntry(const char* name)
+			int getEntry(std::string name)
 			{
 				auto& entry = textureEntries.find(name);
 				if (entry != textureEntries.end())

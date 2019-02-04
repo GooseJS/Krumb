@@ -40,7 +40,10 @@ namespace KrumbEngine
 		setVSync(true);
 
 		//glewExperimental = true;
-		// TODO: Glew stuff goes here
+		if (glewInit() != GLEW_OK)
+		{
+			KRUMB_CORE_CRITICAL("Could not initialize GLEW!");
+		}
 
 		glfwSetWindowSizeCallback(_window, [](GLFWwindow* window, int width, int height)
 		{

@@ -3,6 +3,9 @@
 
 #include "Krumb/filesystem/WorldIO.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
+
 class KrumbApp : public KrumbEngine::Application
 {
 public:
@@ -10,8 +13,7 @@ public:
 
 	KrumbApp()
 	{
-		KrumbEngine::EventSystem::getInstance()->addListener<KrumbEngine::EventWindowResize>(KRUMB_SUBSCRIBE_EVENT(&KrumbApp::windowResize));
-		blockLoader.getBlockDataForBlock("dirt.json");
+		KrumbEngine::EventSystem::getInstance()->addListener<KrumbEngine::EventWindowOpen>(KRUMB_SUBSCRIBE_EVENT(&KrumbApp::onWindowOpen));
 	}
 
 
@@ -30,9 +32,17 @@ public:
 
 	}
 
-	void windowResize(KrumbEngine::EventWindowResize& event)
+	void onWindowOpen(KrumbEngine::EventWindowOpen event)
 	{
-		KRUMB_INFO("Window Resized. New Size - X:{}, Y:{}", event.windowData().width, event.windowData().height);
+		std::vector<std::string> textureFileNames;
+		textureFileNames.emplace_back("dirt.png");
+		textureFileNames.emplace_back("grass-side.png");
+		textureFileNames.emplace_back("grass-top.png");
+		KrumbEngine::Texture::TextureArray textureArray = KrumbEngine::Texture::create2DTextureArray(16, 16, textureFileNames);
+		blockLoader.setTextureArray(textureArray);
+		Krumb::BlockData dirtBlockData = blockLoader.loadBlockData("dirt.json");
+
+		KRUMB_INFO("Dirt Texture ID: {}.", dirtBlockData.textureLayers.nx);
 	}
 };
 

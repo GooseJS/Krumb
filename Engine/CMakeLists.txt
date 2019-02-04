@@ -29,10 +29,14 @@ target_include_directories(KrumbEngine PUBLIC	"src"
 												"../lib/spdlog/include"
 												"../lib/stb"
 												glfw
-												libglew_static)
-target_link_libraries(KrumbEngine PUBLIC glfw libglew_static)
+												libglew_shared)
+target_link_libraries(KrumbEngine PUBLIC glfw libglew_shared)
 
 add_custom_command(TARGET KrumbEngine POST_BUILD        # Adds a post-build event to MyTest
     COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
         "${CMAKE_CURRENT_BINARY_DIR}/Debug/KrumbEngine.dll"      # <--this is in-file
-        "${CMAKE_CURRENT_SOURCE_DIR}/../data/KrumbEngine.dll") 
+        "${CMAKE_CURRENT_SOURCE_DIR}/../data/KrumbEngine.dll")
+add_custom_command(TARGET KrumbEngine POST_BUILD        # Adds a post-build event to MyTest
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
+        "${CMAKE_CURRENT_BINARY_DIR}/../bin/Debug/glewd.dll"      # <--this is in-file
+        "${CMAKE_CURRENT_SOURCE_DIR}/../data/glewd.dll") 
