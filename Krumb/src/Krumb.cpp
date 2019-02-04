@@ -1,11 +1,17 @@
 #include <KrumbEngine.h>
+#include <KrumbEngine/EntryPoint.h>
+
+#include "Krumb/filesystem/WorldIO.h"
 
 class KrumbApp : public KrumbEngine::Application
 {
 public:
+	Krumb::BlockLoader blockLoader;
+
 	KrumbApp()
 	{
 		KrumbEngine::EventSystem::getInstance()->addListener<KrumbEngine::EventWindowResize>(KRUMB_SUBSCRIBE_EVENT(&KrumbApp::windowResize));
+		blockLoader.getBlockDataForBlock("dirt.json");
 	}
 
 
