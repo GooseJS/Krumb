@@ -5,6 +5,7 @@ set(KRUMB_GAME_SRC	"src/Krumb.cpp"
 					"src/Krumb/world/Block.h"
 					"src/Krumb/world/Chunk.cpp"
 					"src/Krumb/world/Chunk.h"
+					"src/Krumb/world/WorldDefines.h"
 					"src/Krumb/filesystem/WorldIO.h"
 					"src/Krumb/filesystem/WorldIO.cpp")
 

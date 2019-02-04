@@ -29,6 +29,40 @@ namespace Krumb
 
 	struct BlockData
 	{
+		uint8_t blockID;
 		BlockFaceLayers textureLayers;
+
+		bool shouldRenderWithWorld;
+	};
+
+	class Block
+	{
+	private:
+		friend class BlockManager;
+		int _blockID;
+		const char* _name;
+		BlockData _data;
+	public:
+		Block(const char* name, BlockData blockData);
+		int getBlockID() const { return _blockID; }
+		const char* getName() const { return _name; }
+		BlockData& getBlockData() { return _data; }
+	};
+
+	class BlockManager
+	{
+	private:
+		std::vector<Block> _registeredBlocks;
+	public:
+		static BlockManager* getInstance()
+		{
+			static BlockManager instance;
+			return &instance;
+		}
+
+		int registerBlock(Block block);
+		Block getBlock(int blockID);
+		Block getBlock(const char* blockName);
+		int getLastBlockID();
 	};
 }
