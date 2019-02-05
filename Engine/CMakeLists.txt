@@ -32,6 +32,7 @@ target_include_directories(KrumbEngine PUBLIC	"src"
 												libglew_shared)
 target_link_libraries(KrumbEngine PUBLIC glfw libglew_shared)
 
+if (MCVS)
 add_custom_command(TARGET KrumbEngine POST_BUILD        # Adds a post-build event to MyTest
     COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
         "${CMAKE_CURRENT_BINARY_DIR}/Debug/KrumbEngine.dll"      # <--this is in-file
@@ -40,3 +41,4 @@ add_custom_command(TARGET KrumbEngine POST_BUILD        # Adds a post-build even
     COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
         "${CMAKE_CURRENT_BINARY_DIR}/../bin/Debug/glewd.dll"      # <--this is in-file
         "${CMAKE_CURRENT_SOURCE_DIR}/../data/glewd.dll") 
+endif()

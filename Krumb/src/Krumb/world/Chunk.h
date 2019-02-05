@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <cstdint>
+
 #include <KrumbEngine/Logger.h>
 
 #include "Krumb/world/WorldDefines.h"
@@ -59,7 +60,7 @@ namespace Krumb
 		ChunkData _data;
 		ChunkLayer _chunkLayers[KRUMB_CHUNK_LENGTH];
 	public:
-		Chunk(int x, int y, int z);
+		Chunk(ChunkPos pos);
 
 		Block getBlockAt(int index);
 		Block getBlockAt(ChunkBlockPos pos);
@@ -70,8 +71,5 @@ namespace Krumb
 		ChunkLayer getLayerAt(int y);
 
 		inline ChunkPos getChunkPos() { return _pos; }
-
-//		template<typename Pos, typename = std::enable_if<std::is_base_of<BlockPos, Pos>::value>::type*>
-//		int getBlockAt(Pos pos);
 	};
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef KMB_PLATFORM_WINDOWS
+#ifdef KRUMB_PLATFORM_WINDOWS
 #ifdef KMB_BUILD_DLL
 #define KRUMB_API _declspec(dllexport)
 #else

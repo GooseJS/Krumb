@@ -2,7 +2,7 @@
 
 namespace Krumb
 {
-	Chunk::Chunk(int x, int y, int z) : _pos(x, z), _data(KRUMB_CHUNK_VOLUME)
+	Chunk::Chunk(ChunkPos pos) : _pos(pos), _data(KRUMB_CHUNK_VOLUME)
 	{
 
 	}
@@ -10,12 +10,12 @@ namespace Krumb
 	Block Chunk::getBlockAt(int index)
 	{
 		// TODO: Debug checking if greater than chunk volume?
-		_data.getDataAt(index);
+		return BlockManager::getInstance()->getBlock(_data.getDataAt(index));
 	}
 
 	Block Chunk::getBlockAt(ChunkBlockPos pos)
 	{
-		getBlockAt(pos.index());
+		return getBlockAt(pos.index());
 	}
 
 	void Chunk::setBlockAt(int index, Block block)

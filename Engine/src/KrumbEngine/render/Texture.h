@@ -41,7 +41,7 @@ namespace KrumbEngine
 
 			int getEntry(std::string name)
 			{
-				auto& entry = textureEntries.find(name);
+				auto entry = textureEntries.find(name);
 				if (entry != textureEntries.end())
 					return entry->second;
 				return -1;

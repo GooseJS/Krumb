@@ -7,7 +7,7 @@ namespace Krumb
 
 	}
 
-	int BlockManager::registerBlock(Block block)
+	int BlockManager::registerBlock(Block& block)
 	{
 		int blockID = _registeredBlocks.size();
 		block._blockID = blockID;

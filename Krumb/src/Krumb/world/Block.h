@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <vector>
 
 #include <KrumbEngine.h>
 
@@ -60,7 +61,7 @@ namespace Krumb
 			return &instance;
 		}
 
-		int registerBlock(Block block);
+		int registerBlock(Block& block);
 		Block getBlock(int blockID);
 		Block getBlock(const char* blockName);
 		int getLastBlockID();
