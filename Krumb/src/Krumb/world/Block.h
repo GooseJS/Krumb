@@ -16,7 +16,7 @@
 
 namespace Krumb
 {
-	typedef int BlockFaceLayer;
+	typedef int BlockFace;
 
 	struct BlockFaceLayers
 	{

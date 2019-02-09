@@ -1,5 +1,6 @@
 {
   "textures": {
     "all":  "grass-top"
-  }
+  },
+  "shouldRenderWithWorld": true
 }

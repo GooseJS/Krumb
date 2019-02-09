@@ -2,11 +2,14 @@
 
 #include <memory>
 #include <cstdint>
+#include <stdlib.h>
+#include <array>
 
 #include <KrumbEngine/Logger.h>
 
-#include "Krumb/world/WorldDefines.h"
 #include "Krumb/world/Block.h"
+#include "Krumb/render/ChunkMesh.h"
+#include "Krumb/world/WorldDefines.h"
 
 namespace Krumb
 {
@@ -25,7 +28,7 @@ namespace Krumb
 		void setDataAt(int index, int data) { _data[index] = data; }
 	};
 
-	class Chunk
+	class Chunk : public std::enable_shared_from_this<Chunk>
 	{
 	public:
 		struct ChunkLayer
@@ -58,9 +61,18 @@ namespace Krumb
 	private:
 		ChunkPos _pos;
 		ChunkData _data;
+        ChunkMesh _chunkMesh {};
 		ChunkLayer _chunkLayers[KRUMB_CHUNK_LENGTH];
+
+		std::array<std::shared_ptr<Chunk>, KRUMB_CHUNK_HEIGHT> _chunkColumn;
+
+		bool withinYBounds(int y);
+
 	public:
+		Chunk();
 		Chunk(ChunkPos pos);
+
+		void init();
 
 		Block getBlockAt(int index);
 		Block getBlockAt(ChunkBlockPos pos);
@@ -71,5 +83,6 @@ namespace Krumb
 		ChunkLayer getLayerAt(int y);
 
 		inline ChunkPos getChunkPos() { return _pos; }
+		inline ChunkMesh& getChunkMesh(int chunkY) { if (_pos.y == chunkY) return _chunkMesh; else return _chunkColumn[chunkY]->getChunkMesh(chunkY); }
 	};
 }

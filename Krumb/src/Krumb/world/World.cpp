@@ -20,6 +20,7 @@ namespace Krumb
         {
             // TODO: This is when we attempt to either load chunk from disk if it's been generated, or generate it if it hasn't
             chunk = std::make_shared<Chunk>(chunkPos);
+            chunk->init();
             _loadedChunks.insert(std::pair<ChunkPos, ChunkPtr>(chunkPos, chunk));
         }
         else

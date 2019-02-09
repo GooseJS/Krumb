@@ -8,3 +8,6 @@
 #include "KrumbEngine/event/IEvent.h"
 #include "KrumbEngine/input/InputEvents.h"
 #include "KrumbEngine/window/WindowEvents.h"
+
+#include "KrumbEngine/render/Shader.h"
+#include "KrumbEngine/render/Texture.h"

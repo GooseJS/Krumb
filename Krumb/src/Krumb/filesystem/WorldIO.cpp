@@ -91,6 +91,11 @@ namespace Krumb
 			KRUMB_ERROR("No texture layers found for block {}.", blockName);
 		}
 
+		if (DOES_JSON_EXIST(file, "shouldRenderWithWorld"))
+		{
+			retVal.shouldRenderWithWorld = file["shouldRenderWithWorld"].get<bool>();
+		}
+
 		return retVal;
 	}
 }

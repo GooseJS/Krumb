@@ -24,6 +24,25 @@ namespace Krumb
 		{}
 
 		BlockPos(struct ChunkBlockPos pos);
+
+		BlockPos changeX(int num)
+		{
+			x += num;
+			return *this;
+
+		}
+
+		BlockPos changeY(int num)
+		{
+			y += num;
+			return *this;
+		}
+
+		BlockPos changeZ(int num)
+		{
+			z += num;
+			return *this;
+		}
 	};
 
 	struct ChunkBlockPos : public BlockPos
@@ -63,10 +82,15 @@ namespace Krumb
 			uint64_t value;
 		};
 
+		uint32_t y;
+
 		explicit ChunkPos(uint64_t _value) : value(_value)
 		{}
 
-		ChunkPos(int _x, int _z) : x(_x), z(_z)
+		ChunkPos(int _x, int _z) : x(_x), z(_z), y(0)
+		{}
+
+		ChunkPos(int _x, int _y, int _z) : x(_x), y(_y), z(_z)
 		{}
 
 		bool operator==(const ChunkPos &other) const
@@ -83,12 +107,16 @@ namespace Krumb
 		{
 			x = pos.x >> 4;
 			z = pos.z >> 4;
+			if (pos.y < 0) y = 0;
+			else y = static_cast<uint32_t>(pos.y >> 4);
 		}
 
 		ChunkPos(ChunkBlockPos pos)
 		{
 			x = pos.chunkX;
 			z = pos.chunkZ;
+			if (pos.y < 0) y = 0;
+			else y = static_cast<uint32_t>(pos.y >> 4);
 		}
 	};
 
@@ -98,14 +126,6 @@ namespace Krumb
 		z = pos.z + (pos.chunkZ * KRUMB_CHUNK_LENGTH);
 		y = pos.y;
 	}
-
-	struct ChunkPosHasher
-	{
-		std::size_t operator()(const ChunkPos chunkPos) const noexcept
-		{
-			return chunkPos.value; // or use boost::hash_combine (see Discussion)
-		}
-	};
 }
 
 namespace std

@@ -6,7 +6,7 @@
 
 namespace KrumbEngine
 {
-	struct EventWindowOpen : public IEvent
+	struct EventWindowOpen : public KrumbEngine::IEvent
 	{
 	private:
 		WindowData& _windowData;
